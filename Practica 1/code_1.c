@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void main(){
+int main(){
 	int meses,anios,edad;
 	printf("INGRESA TU EDAD.\n\n");
 	printf("Años: ");
@@ -9,4 +9,5 @@ void main(){
 	scanf("%d",&anios);
 	edad = (anios * 12) + meses;
 	printf("Tu edad en meses es: %d\n\n",edad);
+	return 0;
 }
