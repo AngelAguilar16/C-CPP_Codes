@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
  
-typedef struct snodo{ //snodo es el nombre de la estructura
+typedef struct snodo{ 
     int valor;
-    struct snodo *sig; //El puntero siguiente para recorrer la lista enlazada
-}tnodo; //tnodo es el tipo de dato para declarar la estructura
+    struct snodo *sig; 
+}tnodo; 
  
-typedef tnodo *tpuntero; //Puntero al tipo de dato tnodo para no utilizar punteros de punteros
+typedef tnodo *tpuntero; 
  
-void insertarEnLista (tpuntero *cabeza, int e);
-void imprimirLista (tpuntero cabeza);
-void borrarLista (tpuntero *cabeza);
+void insertarEnLista (tpuntero *head, int e);
+void imprimirLista (tpuntero head);
+void borrarLista (tpuntero *head);
  
 int main(){
     int e,op;
-    tpuntero cabeza; //Indica la cabeza de la lista enlazada, si la perdemos no podremos acceder a la lista
-    cabeza = NULL; //Se inicializa la cabeza como NULL ya que no hay ningun nodo cargado en la lista
+    tpuntero head; 
+    head = NULL; 
     while(op != 4){
         printf("\n\n\t\tMenu\n\n");
         printf("1) Ingresar datos\n");
@@ -30,20 +30,21 @@ int main(){
                 scanf("%d",&e);
         
                 while(e!=-1){
-                    insertarEnLista (&cabeza, e);
-                    printf ("Ingresado correctamente");
+                    insertarEnLista (&head, e);
+                    printf ("Ingresado correctamente el valor %d", e);
                     printf ("\n");
                     printf("Ingrese elementos, -1 para terminar: ");
                     scanf("%d",&e);
                 }
                 break;
             case 2:
-                printf ("\nSe imprime la lista cargada: ");
-                imprimirLista (cabeza);
+                printf ("\nSe imprime la lista: ");
+                imprimirLista (head);
                 break;
             case 3:
-                printf ("\nSe borra la lista cargada\n");
-                borrarLista (&cabeza);
+                printf("Ingrese elemento a borrar: ");
+                scanf("%d",&e);
+                borrarDato(e);
                 break;
 
             default:
@@ -56,27 +57,37 @@ int main(){
 }
  
  
-void insertarEnLista (tpuntero *cabeza, int e){
-    tpuntero nuevo; //Creamos un nuevo nodo
-    nuevo = malloc(sizeof(tnodo)); //Utilizamos malloc para reservar memoria para ese nodo
-    nuevo->valor = e; //Le asignamos el valor ingresado por pantalla a ese nodo
-    nuevo->sig = *cabeza; //Le asignamos al siguiente el valor de cabeza
-    *cabeza = nuevo; //Cabeza pasa a ser el ultimo nodo agregado
+void insertarEnLista (tpuntero *head, int e){
+    tpuntero nuevo;
+    nuevo = malloc(sizeof(tnodo));
+    nuevo->valor = e;
+    nuevo->sig = *head;
+    *head = nuevo;
 }
  
-void imprimirLista(tpuntero cabeza){
-    while(cabeza != NULL){ //Mientras cabeza no sea NULL
-        printf("%4d",cabeza->valor); //Imprimimos el valor del nodo
-        cabeza = cabeza->sig; //Pasamos al siguiente nodo
+void imprimirLista(tpuntero head){
+    while(head != NULL){
+        printf("%4d",head->valor);
+        head = head->sig;
     }
 }
  
-void borrarLista(tpuntero *cabeza){ 
-    tpuntero actual; //Puntero auxiliar para eliminar correctamente la lista
+void borrarLista(tpuntero *head){ 
+    tpuntero actual;
   
-    while(*cabeza != NULL){ //Mientras cabeza no sea NULL
-        actual = *cabeza; //Actual toma el valor de cabeza
-        *cabeza = (*cabeza)->sig; //Cabeza avanza 1 posicion en la lista
-        free(actual); //Se libera la memoria de la posicion de Actual (el primer nodo), y cabeza queda apuntando al que ahora es el primero
+    while(*head != NULL){
+        actual = *head;
+        *head = (*head)->sig;
+        free(actual);
+    }
+}
+
+void borrarDato(tpuntero *head){
+    tpuntero actual;
+
+    if(*head != NULL){
+        actual = *head;
+        *head = (*head)->sig;
+        free(actual);
     }
 }
