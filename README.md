@@ -9,5 +9,5 @@ Desarrolado por: [Ángel Aguilar](https://twitter.com/devangelaguilar)
 
 
 <p align="center">
-    <img src="Logo_AA.png" width="100px">
+    <img src="https://www.dl.dropboxusercontent.com/s/i409rjddkaz59wo/Logo_AA_Ver2.png?dl=0" width="100px">
 </p>
